@@ -5,5 +5,6 @@
 ## BUILDPACK HEROKU
 
 `
-https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest
+ffmpeg : https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest
+libwebp : https://github.com/clhuang/heroku-buildpack-webp-binaries.git
 `
