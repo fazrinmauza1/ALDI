@@ -1,0 +1,104 @@
+{
+
+  "name": "Simpel WhatsApp Bot",
+
+  "description": "Thank you for using this script, don't forget to subscribe to my channel Adi Official",
+
+  "logo": "https://i.ibb.co/8z7zqXv/IMG-20210618-WA0001.jpg",
+
+  "keywords": ["termux-whatsapp-bot",
+
+    "whatsapp-bot",
+
+    "whatsapp",
+
+    "js-whatsapp"],
+
+  "repository": "https://github.com/ALDI33/SAINS-BOT-V1.0.0",
+
+  "website": "https://instagram/xziyy__",
+
+  "env": {
+
+    "API_KEY": {
+
+      "description": "Get the API key here https://ziy
+
+herokuapp.com",
+
+      "required": true
+
+    },
+
+    
+
+
+
+
+    "BOT_NAME": {
+
+      "description": "Enter Your Bot Name",
+
+      "required": false
+
+    },
+
+    "OWNER_NUMBER": {
+
+      "description": "your whatsapp number",
+
+      "required": true
+
+    },
+
+    "BOT_FAKE": {
+
+      "description": "your whatsapp bot FAKE",
+
+      "required": false
+
+    }
+
+},
+
+  "buildpacks": [
+
+    {
+
+      "url": "heroku/nodejs"
+
+    },
+
+    {
+
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+
+    },
+
+    {
+
+      "url": "https://github.com/DuckyTeam/heroku-buildpack-imagemagick"
+
+    },
+
+    {
+
+      "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
+
+    }
+
+  ],
+
+   "formation": {
+
+        "worker": {
+
+            "quantity": 1,
+
+            "size": "free"
+
+        }
+
+    }
+
+}
