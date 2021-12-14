@@ -4,7 +4,7 @@
 
 ## FOR DEPLOY HEROKU USER
 
-<p><a href="https://heroku.com/deploy?template=https://github.com/Adi-OfficialL/wabot-adi"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
+<p><a href="https://heroku.com/deploy?template=https://github.com/ALDI33/SAINS-BOT-V1.0.0"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 
 
 
