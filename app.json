@@ -4,7 +4,7 @@
 
   "description": "Thank you for using this script, don't forget to subscribe to my channel xZiyy",
 
-  "logo": "https://i.ibb.co/8z7zqXv/IMG-20210618-WA0001.jpg",
+  "logo": "https://telegra.ph/file/c9a5ce748994affe50d4f.jpg",
 
   "keywords": ["termux-whatsapp-bot",
 
@@ -20,44 +20,13 @@
 
   "env": {
 
-    "API_KEY": {
+    "NAME": {
 
-      "description": "Get the API key here https://ziy.herokuapp.com",
-
-      "required": true
-
-    },
-
-    
-
-
-
-
-    "BOT_NAME": {
-
-      "description": "Enter Your Bot Name",
+      "description": "Enter Your Name",
 
       "required": false
 
     },
-
-    "OWNER_NUMBER": {
-
-      "description": "your whatsapp number",
-
-      "required": true
-
-    },
-
-    "BOT_FAKE": {
-
-      "description": "your whatsapp bot FAKE",
-
-      "required": false
-
-    }
-
-},
 
   "buildpacks": [
 
