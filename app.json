@@ -22,9 +22,7 @@
 
     "API_KEY": {
 
-      "description": "Get the API key here https://ziy
-
-herokuapp.com",
+      "description": "Get the API key here https://ziy.herokuapp.com",
 
       "required": true
 
