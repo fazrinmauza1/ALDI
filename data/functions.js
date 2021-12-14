@@ -1,0 +1,122 @@
+const fetch = require('node-fetch')
+const axios = require('axios')
+const cfonts = require('cfonts')
+const spin = require('spinnies')
+const Crypto = require('crypto')
+
+
+const h2k = (number) => {
+    var SI_POSTFIXES = ["", " K", " M", " G", " T", " P", " E"]
+    var tier = Math.log10(Math.abs(number)) / 3 | 0
+    if(tier == 0) return number
+    var postfix = SI_POSTFIXES[tier]
+    var scale = Math.pow(10, tier * 3)
+    var scaled = number / scale
+    var formatted = scaled.toFixed(1) + ''
+    if (/\.0$/.test(formatted))
+      formatted = formatted.substr(0, formatted.length - 2)
+    return formatted + postfix
+}
+
+const runtime = (seconds) => {
+  seconds = Number(seconds);
+  var d = Math.floor(seconds / (3600 * 24));
+  var h = Math.floor((seconds % (3600 * 24)) / 3600);
+  var m = Math.floor((seconds % 3600) / 60);
+  var s = Math.floor(seconds % 60);
+  var dDisplay = d > 0 ? d + (d == 1 ? " hari, " : " Hari, ") : "";
+  var hDisplay = h > 0 ? h + (h == 1 ? " jam, " : " Jam, ") : "";
+  var mDisplay = m > 0 ? m + (m == 1 ? " menit, " : " Menit, ") : "";
+  var sDisplay = s > 0 ? s + (s == 1 ? " detik" : " Detik") : "";
+  return dDisplay + hDisplay + mDisplay + sDisplay;
+};
+
+const kyun = (seconds) =>{
+    function pad(s) {
+        return (s < 10 ? '0' : '') + s;
+    }
+    var hours = Math.floor(seconds / (60 * 60));
+    var minutes = Math.floor(seconds % (60 * 60) / 60);
+    var seconds = Math.floor(seconds % 60);
+
+    //return pad(hours) + ':' + pad(minutes) + ':' + pad(seconds)
+    return `${pad(hours)}Jam - ${pad(minutes)}Menit -  ${pad(seconds)}Detik`
+}
+const randomBytes = (length) => {
+    return Crypto.randomBytes(length)
+}
+
+const generateMessageID = () => {
+    return randomBytes(10).toString('hex').toUpperCase()
+}
+
+const getGroupAdmins = (participants) => {
+	admins = []
+	for (let i of participants) {
+		i.isAdmin ? admins.push(i.jid) : ''
+	}
+	return admins
+}
+
+const getRandom = (ext) => {
+	return `${Math.floor(Math.random() * 10000)}${ext}`
+}
+
+const spinner = { 
+  "interval": 120,
+  "frames": [
+"[ 𝙇𝙊𝘼𝘿𝙄𝙉𝙂 ] [░░░░░░░░░░░░░░░]",
+"[ 𝙇𝙊𝘼𝘿𝙄𝙉𝙂 ] [■░░░░░░░░░░░░░░]",
+"[ 𝙇𝙊𝘼𝘿𝙄𝙉𝙂 ] [■■░░░░░░░░░░░░░]",
+"[ 𝙇𝙊𝘼𝘿𝙄𝙉𝙂 ] [■■■░░░░░░░░░░░░]",
+"[ 𝙇𝙊𝘼𝘿𝙄𝙉𝙂 ] [■■■■░░░░░░░░░░░]",
+"[ 𝙇𝙊𝘼𝘿𝙄𝙉𝙂 ] [■■■■■░░░░░░░░░░]",
+"[ 𝙇𝙊𝘼𝘿𝙄𝙉𝙂 ] [■■■■■■░░░░░░░░░]",
+"[ 𝙇𝙊𝘼𝘿𝙄𝙉𝙂 ] [■■■■■■■░░░░░░░░]",
+"[ 𝙇𝙊𝘼𝘿𝙄𝙉𝙂 ] [■■■■■■■■░░░░░░░]",
+"[ 𝙇𝙊𝘼𝘿𝙄𝙉𝙂 ] [■■■■■■■■■░░░░░░]",
+"[ 𝙇𝙊𝘼𝘿𝙄𝙉𝙂 ] [■■■■■■■■■■░░░░░]",
+"[ 𝙇𝙊𝘼𝘿𝙄𝙉𝙂 ] [■■■■■■■■■■■░░░░]",
+"[ 𝙇𝙊𝘼𝘿𝙄𝙉𝙂 ] [■■■■■■■■■■■■░░░]",
+"[ 𝙇𝙊𝘼𝘿𝙄𝙉𝙂 ] [■■■■■■■■■■■■■░░]",
+"[ 𝙇𝙊𝘼𝘿𝙄𝙉𝙂 ] [■■■■■■■■■■■■■■░]",
+"[ 𝙇𝙊𝘼𝘿𝙄𝙉𝙂 ] [■■■■■■■■■■■■■■■]"
+  ]}
+        let globalSpinner;
+
+
+        const getGlobalSpinner = (disableSpins = false) => {
+        if(!globalSpinner) globalSpinner = new spin({ color: 'blue', succeedColor: 'green', spinner, disableSpins});
+        return globalSpinner;
+        }
+
+spins = getGlobalSpinner(false)
+        const start = (id, text) => {
+	       spins.add(id, {text: text})
+		/*setTimeout(() => {
+			spins.succeed('load-spin', {text: 'Suksess'})
+		}, Number(wait) * 1000)*/
+	       }
+        const info = (id, text) => {
+	       spins.update(id, {text: text})
+        }
+        const success = (id, text) => {
+	       spins.succeed(id, {text: text})
+
+	       }
+
+        const close = (id, text) => {
+	       spins.fail(id, {text: text})
+        }
+ 
+            const banner = cfonts.render(('SELF BOT'), {
+                font: 'block',
+                color: 'white',
+                align: 'left',
+                gradient: ["red","yellow"],
+                lineHeight: 2
+                });
+
+
+
+module.exports = { runtime, kyun, h2k, generateMessageID, getGroupAdmins, getRandom, start, info, success, banner, close }
