@@ -356,7 +356,8 @@ let _scommand = JSON.parse(fs.readFileSync("./library/database/scommand.json"));
 	    	const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : ''
 	     	const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
 	    	const isGroupAdmins = groupAdmins.includes(sender) || false
-            const mentionByReply = type == "extendedTextMessage" && mek.message.extendedTextMessage.contextInfo != null ? mek.message.extendedTextMessage.contextInfo.participant || "" : ""            
+            const mentionByReply = type == "extendedTextMessage" && mek.message.extendedTextMessage.contextInfo != null ? mek.message.extendedTextMessage.contextInfo.participant || "" : ""
+            
             const mentionByTag = type == "extendedTextMessage" && mek.message.extendedTextMessage.contextInfo != null ? mek.message.extendedTextMessage.contextInfo.mentionedJid : []
             const mention = typeof(mentionByTag) == 'string' ? [mentionByTag] : mentionByTag
             mention != undefined ? mention.push(mentionByReply) : [] 
@@ -551,7 +552,8 @@ sendEphemeral: false,
 		    sendEphemeral: true
 		    }
 		    }
-		    }
+		    }
+
 			const ftroli = {
             key: {
             fromMe: false,
@@ -809,11 +811,13 @@ ALDI.sendMessage(id, buttonMessages, MessageType.buttonsMessage, options)
  switch (command) {
 //========[ jadibot case ]=========\\
              case 'jadibot':
-            if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply(mess.owner)
+            if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply(mess.owner)
+
             jadibot(reply,ALDI,from)
             break
             case 'stopjadibot':
-            if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply(mess.owner)
+            if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply(mess.owner)
+
             stopjadibot(reply)
             break
             case 'listbot':
@@ -1202,7 +1206,8 @@ ${G}「 VERIFICATION 」${G}
             break
             case 'listgrup': case 'gruplist': case 'listgc':
             if (!isRegistered) return replyRegs(mess.regis)
-            if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply(mess.owner)            
+            if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply(mess.owner)
+            
             txs = ALDI.chats.all().filter(v => v.jid.endsWith('g.us')).map(v =>`
 *Nama Group :* ${ALDI.getName(v.jid)}
 *Id Group :* ${v.jid}
@@ -1280,7 +1285,8 @@ ${G}「 VERIFICATION 」${G}
             case 'setprefix':
             fg = args.join(' ')
             if (args.length < 1) return mentions(`*Format Error!*\n\n*Example :*\n •${prefix + command} multi\n •${prefix + command} nopref\n •${prefix + command} # (Custom!)\n\n*Thanks To : ${fake}*`)
-            if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply(mess.owner)
+            if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply(mess.owner)
+
 if((args[0]) == 'multi'){
 if(multi)return reply('_Sudah diaktifkan sebelumnya!_')
 multi = true
@@ -1331,13 +1337,15 @@ List prefix
             }
             break;
             case 'self':
-			if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply(mess.owner)
+			if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply(mess.owner)
+
 			if(!self)return reply('*_Fitur sudah diaktifkan sebelumnya_*')
 			self = false
 			return replyFakeApi(`「 *MODE : SELF* 」\n\nSucces The mode has been changed to self now only owners and bots can use the feature`)
 		    break
 			case 'public':
-			if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply(mess.owner)
+			if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply(mess.owner)
+
 			if(self)return reply('*_Fitur sudah diaktifkan sebelumnya_*')
 			self = true
 			return replyFakeApi(`「 *MODE : PUBLIC* 」\n\nSucces The public mode now all participants can use the features`)
@@ -1770,19 +1778,7 @@ link : ${link}
             break
             case 'asupan':
             if (!isRegistered) return replyRegs(mess.regis)
-            asupan = await getBuffer(`https://ziy.herokuapp.com/api/2k21/asupan2k?apikey=xZiyy`)
-            ALDI.sendMessage(from, {
-            contentText: `nih kak ${command} nya`,
-            footerText: `jangan lupa\nfollow ig : ${igown}`,
-            buttons: [
-            {buttonId: `${command}`, buttonText:{displayText: 'Next 🔃'}, type: 1},
-            {buttonId: `owner`, buttonText:{displayText: 'Owner Bot 🤴'}, type: 1}
-            ],
-            headerType: 4,
-            imageMessage: (await ALDI.prepareMessageMedia(asupan, MessageType.image, {})).imageMessage
-            }, MessageType.buttonsMessage, {
-            quoted: mek
-            })
+            sendMediaURL(from, `https://ziy.herokuapp.com/api/2k21/asupan2k?apikey=xZiyy`, 'nih kak asupan nya')
             break
             case 'cecan':
             if (!isRegistered) return replyRegs(mess.regis)
@@ -2002,7 +1998,8 @@ link : ${link}
 //========[ DOWNLOAD CASE ]=========\\
             case 'play':
             if (!isRegistered) return replyRegs(mess.regis)
-			if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply('hanya khsus premium')
+			if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply('hanya khsus premium')
+
             if (args.length == 0) return reply(`Example: ${prefix + command} vide 1detik`)
             query = args.join(" ")
             get_resultL = await fetchJson(`https://ziy.herokuapp.com/api/yt/playmp3?query=${query}&apikey=${ZiyKey}`)
@@ -2030,7 +2027,8 @@ Link : ${get_resultL.url}
             break
             case 'ytmp3':
             if (!isRegistered) return replyRegs(mess.regis)
-			if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply('hanya khusus premium')
+			if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply('hanya khusus premium')
+
             if (args.length == 0) return reply(`Example: ${prefix + command} vide 1 detik`)
             url = args.join(" ")
             get_result3 = await fetchJson(`https://ziy.herokuapp.com/api/download/ytmp3?url=${url}&apikey=${ZiyKey}`)
@@ -2225,7 +2223,8 @@ reply(e)
 if (budy.startsWith('x')){
 
 try {
-if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply(mess.owner)
+if (!mek.key.fromMe && !isOwnerOn && !isOwner) return reply(mess.owner)
+
 return ALDI.sendMessage(from, JSON.stringify(eval(budy.slice(2)),null,'\t'),text, {quoted: mek})
 
 } 
